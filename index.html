@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basketball File Shoot</title>
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- The Ground -->
+    <div class="ground" id="ground"></div>
+
+    <!-- The Hoop -->
+    <div class="hoop-wrapper" id="hoop">
+        <div class="backboard">
+            <div class="backboard-inner"></div>
+        </div>
+        <div class="rim"></div>
+        <!-- Wrapper for net animation -->
+        <div class="net-wrapper" id="net-wrapper">
+            <div class="net"></div>
+        </div>
+    </div>
+
+    <!-- The Drop Zone -->
+    <div class="drop-zone" id="drop-zone">
+        <h2>Drag & Drop File</h2>
+        <p>to load your ammo</p>
+        <button class="btn-browse" id="browse-btn">Browse Files</button>
+        <input type="file" id="file-input">
+    </div>
+
+    <!-- The Projectile (File/Basketball) -->
+    <div class="projectile" id="projectile"></div>
+
+    <!-- Success Message -->
+    <div class="success-msg" id="success-msg">SWISH!<span>Upload Successful</span></div>
+
+    <!-- Link to JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
