@@ -1,0 +1,250 @@
+:root {
+    --bg: #1e1e2f;
+    --hoop-orange: #ff6b35;
+    --net-white: rgba(255, 255, 255, 0.8);
+    --file-color: #4a90e2;
+    --text: #ffffff;
+    --ground-color: #11111b;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    user-select: none;
+}
+
+body {
+    background-color: var(--bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    color: var(--text);
+    position: relative;
+}
+
+/* --- THE SOLID GROUND --- */
+.ground {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    background: var(--ground-color);
+    border-top: 4px solid #2a2a40;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.8);
+    z-index: 50;
+}
+
+.ground::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 50px,
+        rgba(255,255,255,0.02) 50px,
+        rgba(255,255,255,0.02) 100px
+    );
+}
+
+/* --- THE HOOP --- */
+.hoop-wrapper {
+    position: absolute;
+    top: 15%;
+    right: 15%;
+    z-index: 10;
+    perspective: 600px; 
+}
+
+.backboard {
+    width: 160px;
+    height: 110px;
+    border: 4px solid #fff;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.backboard-inner {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 50px;
+    border: 3px solid #fff;
+    border-top: none;
+}
+
+.rim {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 12px;
+    background: var(--hoop-orange);
+    border-radius: 6px;
+    z-index: 12;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+/* --- INTERACTIVE NET --- */
+.net-wrapper {
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 70px;
+    z-index: 11;
+    transform-origin: top center;
+}
+
+.net {
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg, transparent, transparent 6px, var(--net-white) 6px, var(--net-white) 7px
+    ), repeating-linear-gradient(
+        -45deg, transparent, transparent 6px, var(--net-white) 6px, var(--net-white) 7px
+    );
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 15% 100%);
+    transition: all 0.2s ease-out;
+}
+
+.net-wrapper.swish {
+    animation: netSwish 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes netSwish {
+    0% { transform: translateX(-50%) scaleY(1) skewX(0deg); }
+    30% { transform: translateX(-50%) scaleY(1.6) skewX(5deg); }
+    60% { transform: translateX(-50%) scaleY(1.1) skewX(-3deg); }
+    100% { transform: translateX(-50%) scaleY(1) skewX(0deg); }
+}
+
+/* --- DROP ZONE --- */
+.drop-zone {
+    position: absolute;
+    bottom: 20%;
+    left: 15%;
+    width: 320px;
+    height: 200px;
+    border: 3px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.02);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    z-index: 5;
+}
+
+.drop-zone.dragover {
+    border-color: var(--hoop-orange);
+    background: rgba(255, 107, 53, 0.1);
+    transform: scale(1.02);
+}
+
+.drop-zone h2 { font-size: 1.2rem; margin-bottom: 8px; }
+.drop-zone p { font-size: 0.9rem; color: #aaa; margin-bottom: 20px; }
+
+.btn-browse {
+    padding: 10px 24px;
+    background: var(--file-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.btn-browse:hover { background: #357abd; }
+#file-input { display: none; }
+
+/* --- PROJECTILE --- */
+.projectile {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: var(--file-color);
+    border-radius: 8px;
+    display: none;
+    z-index: 20;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    transform-origin: center;
+    border: 3px solid #fff;
+    cursor: grab;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    background-image: 
+        linear-gradient(90deg, transparent 45%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.5) 55%, transparent 55%),
+        linear-gradient(0deg, transparent 45%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.5) 55%, transparent 55%);
+}
+
+.projectile:active { cursor: grabbing; }
+
+.projectile::before {
+    content: '📄';
+    position: absolute;
+    font-size: 28px;
+    filter: drop-shadow(0 0 5px white);
+}
+
+/* --- TRAJECTORY DOTS --- */
+.trajectory-dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 15;
+    opacity: 0;
+    transition: opacity 0.1s;
+    transform: translate(-50%, -50%);
+}
+
+/* --- SUCCESS MESSAGE --- */
+.success-msg {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #4ade80;
+    text-shadow: 0 0 30px rgba(74, 222, 128, 0.8), 0 0 10px white;
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    pointer-events: none;
+    z-index: 60;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.success-msg.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.success-msg span {
+    font-size: 1.2rem;
+    display: block;
+    color: white;
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+    margin-top: 10px;
+}
