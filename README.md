@@ -2,7 +2,7 @@
 
 Sometimes I just think about how I can complicate my life. This is the perfect example of it—making a file uploading animation from simple to as complex as it got.
 
-**[Try it Yourself Here]** *(Insert your live link here)*
+**[Try it Yourself Here]** *https://iitianyugank.github.io/basketball-file-upload/*
 
 ### What is this?
 
